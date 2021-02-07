@@ -3,8 +3,8 @@
 Tempo::Tempo() { bpm = 60.0; }
 
 void Tempo::Update(float value) {
-  float coefUp = 0.2;
-  float coefDown = 0.0002;
+  float coefUp = 0.5;
+  float coefDown = 0.002;
   float coef = value > avgValue ? coefUp : coefDown;
   avgValue = avgValue * (1.0 - coef) + value * coef;
   bpm = avgValue * 120.0;
@@ -14,5 +14,5 @@ void Tempo::Update(float value) {
   prevMicros = micros();
   float freq = bpm * 2.0;
   freq = constrain(freq, 10.0, 1000.0);
-  M5.Beep.tone(freq, 100);
+  playSineWave(freq, 4, 100);
 }

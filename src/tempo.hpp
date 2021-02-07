@@ -1,7 +1,9 @@
 #ifndef TEMPO_HPP_
 #define TEMPO_HPP_
 
-#include <M5StickCPlus.h>
+#include <M5Stack.h>
+
+#include "./sine-wave.hpp"
 
 class Tempo {
  public:

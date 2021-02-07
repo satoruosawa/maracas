@@ -1,4 +1,6 @@
-#include <M5StickCPlus.h>
+#define M5STACK_MPU6886
+
+#include <M5Stack.h>
 
 #include "./tempo.hpp"
 
@@ -7,12 +9,12 @@ Tempo tempo;
 void setup() {
   M5.begin();
   M5.IMU.Init();
-  M5.Beep.begin();
+  M5.Speaker.begin();
+  M5.Speaker.setVolume(10);
 }
 
 void loop() {
   M5.update();
-  M5.Beep.update();
   static bool beepState = true;
   if (M5.BtnA.wasPressed()) {
     Serial.println("wasPressed");
