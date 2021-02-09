@@ -11,7 +11,6 @@ class Tempo {
   void Update(float value);
 
  private:
-  float bpm;
   float avgValue;
 };
 
