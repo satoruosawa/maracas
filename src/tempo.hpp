@@ -8,10 +8,11 @@
 class Tempo {
  public:
   Tempo();
-  void Update(float value);
+  void Update(double value);
+  uint8_t volume;
 
  private:
-  float avgValue;
+  double avgValue;
 };
 
 #endif  // TEMPO_HPP_
