@@ -12,7 +12,7 @@ class Tempo {
   uint8_t volume;
 
  private:
-  double avgValue;
+  double avg_value_;
 };
 
 #endif  // TEMPO_HPP_

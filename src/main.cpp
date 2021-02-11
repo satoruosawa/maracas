@@ -4,7 +4,7 @@
 
 #include "./tempo.hpp"
 
-Tempo tempo;
+Tempo TEMPO;
 
 void setup() {
   M5.begin(false, false, false, false);
@@ -15,20 +15,20 @@ void setup() {
 
 void loop() {
   M5.update();
-  static bool beepState = true;
+  static bool beep_state = true;
   if (M5.BtnA.wasPressed()) {
     Serial.println("wasPressed");
-    beepState = !beepState;
+    beep_state = !beep_state;
   }
   if (M5.BtnB.wasPressed()) {
-    tempo.volume /= 2;
-    tempo.volume = constrain(tempo.volume, 4, 100);
+    TEMPO.volume /= 2;
+    TEMPO.volume = constrain(TEMPO.volume, 4, 100);
   }
   if (M5.BtnC.wasPressed()) {
-    tempo.volume *= 2;
-    tempo.volume = constrain(tempo.volume, 4, 100);
+    TEMPO.volume *= 2;
+    TEMPO.volume = constrain(TEMPO.volume, 4, 100);
   }
-  if (beepState) {
+  if (beep_state) {
     // float accX = 0.0;
     // float accY = 0.0;
     // float accZ = 0.0;
@@ -36,17 +36,17 @@ void loop() {
     // float absAcc = sqrt(accX * accX + accY * accY + accZ * accZ);
     // absAcc /= 5.0;
 
-    float gyroX = 0.0;
-    float gyroY = 0.0;
-    float gyroZ = 0.0;
-    M5.IMU.getGyroData(&gyroX, &gyroY, &gyroZ);
-    gyroX += -13.1;
-    gyroY += 14.5;
-    gyroZ += -15.0;
-    float absGyro = sqrt(gyroX * gyroX + gyroY * gyroY + gyroZ * gyroZ);
-    absGyro /= 360.0;
-    absGyro = constrain(absGyro, 0.0, 1.0);
+    float gyro_x = 0.0;
+    float gyro_y = 0.0;
+    float gyro_z = 0.0;
+    M5.IMU.getGyroData(&gyro_x, &gyro_y, &gyro_z);
+    gyro_x += -13.1;
+    gyro_y += 14.5;
+    gyro_z += -15.0;
+    float abs_gyro = sqrt(gyro_x * gyro_x + gyro_y * gyro_y + gyro_z * gyro_z);
+    abs_gyro /= 360.0;
+    abs_gyro = constrain(abs_gyro, 0.0, 1.0);
 
-    tempo.Update(absGyro);
+    TEMPO.Update(abs_gyro);
   }
 }
