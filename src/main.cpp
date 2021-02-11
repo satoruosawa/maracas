@@ -7,7 +7,7 @@
 Tempo TEMPO;
 
 void setup() {
-  M5.begin(false, false, false, false);
+  M5.begin(false, false, false, false);  // LCD, SD, Serial, I2C
   M5.IMU.Init();
   M5.Speaker.begin();
   M5.Speaker.setVolume(10);

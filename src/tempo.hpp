@@ -3,6 +3,7 @@
 
 #include <M5Stack.h>
 
+#include "./frequency.hpp"
 #include "./sine-wave.hpp"
 
 class Tempo {
