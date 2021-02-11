@@ -4,6 +4,7 @@
 #include <M5Stack.h>
 
 #include "./frequency.hpp"
+#include "./module.hpp"
 #include "./sine-wave.hpp"
 
 class Tempo {
