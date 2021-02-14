@@ -8,8 +8,8 @@ void Tempo::Update(double value) {
   double coef_down = 0.0005;
   float bpm_min = 60.0;
   float bpm_max = 400.0;
-  int key_id_min = 28;
-  int key_id_max = 48;
+  int key_id_min = 20;
+  int key_id_max = 40;
 
   double coef = value > avg_value_ ? coef_up : coef_down;
   avg_value_ = avg_value_ * (1.0 - coef) + value * coef;
