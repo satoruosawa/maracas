@@ -4,7 +4,13 @@
 
 #include "./tempo.hpp"
 
+#define lerp(from, to, coef) ((from) * (1.0 - (coef)) + (to) * (coef))
+
 Tempo TEMPO;
+float GYRO_X_AVG = 0.0;
+float GYRO_Y_AVG = 0.0;
+float GYRO_Z_AVG = 0.0;
+float AVG_COEF = 0.1;
 
 void setup() {
   M5.begin(false, false, false, false);  // LCD, SD, Serial, I2C
@@ -40,10 +46,16 @@ void loop() {
     float gyro_y = 0.0;
     float gyro_z = 0.0;
     M5.IMU.getGyroData(&gyro_x, &gyro_y, &gyro_z);
-    gyro_x += -13.1;
-    gyro_y += 14.5;
-    gyro_z += -15.0;
-    float abs_gyro = sqrt(gyro_x * gyro_x + gyro_y * gyro_y + gyro_z * gyro_z);
+    GYRO_X_AVG = lerp(GYRO_X_AVG, gyro_x, AVG_COEF);
+    GYRO_Y_AVG = lerp(GYRO_Y_AVG, gyro_y, AVG_COEF);
+    GYRO_Z_AVG = lerp(GYRO_Z_AVG, gyro_z, AVG_COEF);
+
+    float gyro_x_diff = GYRO_X_AVG - gyro_x;
+    float gyro_y_diff = GYRO_Y_AVG - gyro_y;
+    float gyro_z_diff = GYRO_Z_AVG - gyro_z;
+    float abs_gyro =
+        sqrt(gyro_x_diff * gyro_x_diff + gyro_y_diff * gyro_y_diff +
+             gyro_z_diff * gyro_z_diff);
     abs_gyro /= 360.0;
     abs_gyro = constrain(abs_gyro, 0.0, 1.0);
 
